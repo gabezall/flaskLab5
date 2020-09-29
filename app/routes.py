@@ -1,6 +1,6 @@
-from flask import render_template
+from flask import render_template, redirect, url_for, flash
 from app import app
-
+from app.forms import NewArtistForm
 
 @app.route('/')
 @app.route('/index')
@@ -23,6 +23,20 @@ def specArtist():
     }
     return render_template("specArtist.html", info=info)
 
-@app.route('/newArtists')
+# @app.route('/newArtists')
+# def newArtists():
+#     return render_template('newArtists.html', title='New Artist', newArtist='newArtist')
+
+@app.route('/newArtists', methods=['GET', 'POST'])
 def newArtists():
-    return render_template('newArtists.html', title='New Artist', newArtist='newArtist')
+    form = NewArtistForm()
+    if form.validate_on_submit():
+        flash('Artist info entered for name {}'.format(
+            form.name.data, form.hometown.data, form.description.data))
+        info = {
+            "name": form.name.data,
+            "hometown": form.hometown.data,
+            "description": form.description.data
+        }
+        return render_template("specArtist.html", info=info)
+    return render_template('newArtists.html',  title='New Artists', form=form)

@@ -1,5 +1,21 @@
 {% extends "base.html" %}
 
 {% block content%}
-
+    <h1>Enter New Artist</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.name.label }}
+            {{ form.name(size=32) }}
+        </p>
+        <p>
+            {{ form.hometown.label }}
+            {{ form.hometown(size=32) }}
+        </p>
+        <p>
+            {{ form.description.label }}
+            {{ form.description() }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
 {% endblock %}
