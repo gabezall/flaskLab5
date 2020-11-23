@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 
 {% block content%}
-    <h1>{{ info["name"] }}</h1>
+    <h1>{{ info.name }}</h1>
     <h2>{{ info["hometown"] }}</h2>
-    <h3>{{ info["description"] }}</h3>
+    <h3>{{ info["playlist"] }}</h3>
+    <h3>{{ info["song"] }}</h3>
 
-    {% if info["events"] is defined and info["events"]|length > 0 %}
-    <h3>Events:</h3>
+    <h3>Songs:</h3>
     <ul>
-        {% for event in info["events"] %}
-            <li>{{ event }}</li>
+        {% for song in info.songs %}
+            <li>{{ song.name }}</li>
         {% endfor %}
     </ul>
-    {% endif %}
 {% endblock %}
